@@ -1,0 +1,10 @@
+[project]
+name = "pulseaudio-web"
+version = "0.1.0"
+description = "A simple web application to control PulseAudio volume levels through a modern web interface, similar to pavucontrol but accessible via browser."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pulsectl==22.3.2",
+    "websockets>=16.0",
+]
