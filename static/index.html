@@ -742,7 +742,7 @@
                 pendingDetailedRequests: [],
                 
                 // UI mode toggle
-                simpleMode: true,
+                simpleMode: false,
 
                 init() {
                     this.connect();
@@ -771,12 +771,32 @@
                 
                 try {
                     // Dynamically determine WebSocket URL based on current page
-                    const currentHost = window.location.hostname;
-                    const currentPort = parseInt(window.location.port);
+                    //const currentHost = window.location.hostname;
+                    //const currentPort = parseInt(window.location.port);
+
                     // WebSocket port is typically HTTP port + 685 (8080 + 685 = 8765)
-                    const wsPort = currentPort + 685;
-                    console.log(`Attempting to connect to WebSocket at ws://${currentHost}:${wsPort}`);
-                    this.ws = new WebSocket(`ws://${currentHost}:${wsPort}`);
+                    // const wsPort = currentPort + 685;
+                    // console.log(`Attempting to connect to WebSocket at ws://${currentHost}:${wsPort}`);
+                    // this.ws = new WebSocket(`ws://${currentHost}:${wsPort}`);
+
+                    const currentHost = window.location.hostname;
+                    const parsedPort = parseInt(window.location.port, 10);
+                    const isProxied = !window.location.port || parsedPort === 80 || parsedPort === 443;
+ 
+                    let wsUrl;
+                    if (isProxied) {
+                        // Reverse proxy mode (Caddy handles routing /ws to 8765)
+                        const wsProto = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+                        const portPart = window.location.port ? `:${window.location.port}` : '';
+                        wsUrl = `${wsProto}//${currentHost}${portPart}/ws`;
+                    } else {
+                        // Direct access mode (UI port + 685)
+                        const wsPort = parsedPort + 685;
+                        wsUrl = `ws://${currentHost}:${wsPort}`;
+                    }
+
+                    console.log(`Attempting to connect to WebSocket at ${wsUrl}`);
+                    this.ws = new WebSocket(wsUrl);
                     
                     this.ws.onopen = () => {
                         console.log('Connected to WebSocket server');
