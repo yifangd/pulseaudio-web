@@ -573,9 +573,11 @@
 </head>
 <body x-data="pulseAudioApp()" x-init="init()">
     <div class="container">
+<!--
         <h1>🔊 PulseAudio Web Control</h1>
         
         <div :class="`status ${connectionStatus.class}`" x-text="connectionStatus.message"></div>
+-->
         
         <div class="control-buttons">
             <button class="control-button mode-toggle" @click="toggleMode()">
@@ -586,9 +588,11 @@
             </button>
         </div>
         
+<!--
         <h2 style="margin-bottom: 24px; color: #1a202c; font-weight: 700; font-size: 1.8em; letter-spacing: -0.01em;">
             <span x-text="simpleMode ? '🎯 Default Audio Device' : '🔊 Audio Devices'"></span>
         </h2>
+-->
         
         <!-- Audio Devices Section -->
         <div x-show="getVisibleSinks().length === 0" class="loading">Loading audio devices</div>
@@ -629,7 +633,9 @@
             <span x-text="simpleMode ? 'No default audio device found' : 'No audio devices found'"></span>
         </div>
         
+<!--
         <h2 x-show="!simpleMode" style="margin-top: 40px; margin-bottom: 24px; color: #1a202c; font-weight: 700; font-size: 1.8em; letter-spacing: -0.01em;">🎵 Applications</h2>
+-->
         
         <!-- Applications Section -->
         <div x-show="!simpleMode && applications.length === 0" class="loading">Loading applications</div>
@@ -673,9 +679,12 @@
         </template>
         <div x-show="!simpleMode && applications.length === 0 && !loading.applications" class="no-apps">No applications with audio found</div>
         
+<!--
         <h2 x-show="!simpleMode" style="margin-top: 40px; margin-bottom: 24px; color: #1a202c; font-weight: 700; font-size: 1.8em; letter-spacing: -0.01em;">🎛️ Audio Cards</h2>
+-->
         
         <!-- Audio Cards Section -->
+<!--
         <div x-show="!simpleMode && cards.length === 0" class="loading">Loading audio cards</div>
         <template x-for="card in cards" :key="card.id">
             <div x-show="!simpleMode" class="card-container">
@@ -700,6 +709,7 @@
             </div>
         </template>
         <div x-show="!simpleMode && cards.length === 0 && !loading.cards" class="no-cards">No audio cards found</div>
+-->
     </div>
 
     <script>
