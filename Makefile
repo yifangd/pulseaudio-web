@@ -11,3 +11,5 @@ run:
 open:
 	xdg-open http://localhost:$P
 
+i:
+	sudo rsync -avx pulseweb.sh /y/bin/
