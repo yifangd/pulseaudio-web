@@ -13,3 +13,8 @@ open:
 
 i:
 	sudo rsync -avx pulseweb.sh /y/bin/
+sd:
+	rsync -avx pulseweb.service ~/.config/systemd/user/
+	systemctl daemon-reload --user
+	systemctl status pulseweb --user
+	systemctl restart pulseweb --user
