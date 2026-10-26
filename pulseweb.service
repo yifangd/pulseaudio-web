@@ -1,0 +1,15 @@
+[Unit]
+Description=pulseweb
+Documentation=man:pulseaudio(1)
+Wants=network-online.target
+After=network-online.target sound.target
+
+[Service]
+EnvironmentFile=-/etc/default/pulseweb
+ExecStart=/y/bin/pulseweb.sh
+# very noisy on stdout
+StandardOutput=null
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

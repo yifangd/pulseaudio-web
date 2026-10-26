@@ -11,3 +11,16 @@ run start:
 open:
 	xdg-open http://localhost:$P
 
+i:
+	sudo rsync -avx pulseweb.sh /y/bin/
+	sudo rsync -avx pulse.conf /etc/caddy/sites.d/
+sd:
+	rsync -avx pulseweb.service ~/.config/systemd/user/
+sr:
+	systemctl daemon-reload --user
+status ss:
+	systemctl status pulseweb --user
+restart:
+	systemctl restart pulseweb --user
+r:
+	/y/bin/pulseweb.sh
